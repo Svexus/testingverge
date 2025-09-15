@@ -1,6 +1,6 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <tab name="Init" type="InitTab" active="false" scrollx="20" scrolly="0" scale="0.9"></tab>
-  <tab name="New Tab" type="CommonTab" active="true" scrollx="790.1716164559298" scrolly="42.713010778745684" scale="0.8227024747918819">
+  <tab name="New Tab" type="CommonTab" active="true" scrollx="-13.394134521484375" scrolly="121.24803161621082" scale="1">
     <block xmlns="https://developers.google.com/blockly/xml" type="console.log" id="m+^V%)8GT5.xc;CQ2?H1" x="130" y="-110">
       <value name="VALUE">
         <shadow type="text" id="e]euVdt4*H95J!u${x7Y">
@@ -143,39 +143,103 @@
                         </shadow>
                       </value>
                       <next>
-                        <block type="arHitTest" id="f;+QC{*CTn(2Jiz^HKQE">
-                          <value name="SMOOTH">
-                            <shadow type="math_number" id="]Q#R6IC1j}T,/|Jjr9Bw">
-                              <field name="NUM">0</field>
+                        <block type="removeHTMLElement" id="/VDFy#Kk6%?+2D{e5lxG">
+                          <field name="PARENT">FALSE</field>
+                          <value name="ID">
+                            <shadow type="text" id="aP-u0bJ0|(gED={6eN7W">
+                              <field name="TEXT">tite</field>
                             </shadow>
                           </value>
-                          <statement name="DO_HIT">
-                            <block type="setObjTransform" id="`14#CeLY-Oj_QTO[Q![l">
-                              <mutation xmlns="http://www.w3.org/1999/xhtml" usevectorslot="false" useworldspace="false"></mutation>
-                              <field name="MODE">position</field>
-                              <field name="OFFSET">FALSE</field>
-                              <value name="TARGETOBJ">
-                                <shadow type="objectList" id="QhAu|2JN]AKy@Dsr$b=c">
-                                  <field name="FIELDNAME">LateralFace</field>
+                          <next>
+                            <block type="arHitTest" id="f;+QC{*CTn(2Jiz^HKQE">
+                              <value name="SMOOTH">
+                                <shadow type="math_number" id="]Q#R6IC1j}T,/|Jjr9Bw">
+                                  <field name="NUM">0</field>
                                 </shadow>
                               </value>
-                              <value name="X">
-                                <block type="arHitPoint" id="e|#{C=J@zwcAnxknTT.{">
-                                  <field name="COORD">x</field>
+                              <statement name="DO_HIT">
+                                <block type="setObjTransform" id="gQJR!@Yu^U8SHx-R[jI9">
+                                  <mutation xmlns="http://www.w3.org/1999/xhtml" usevectorslot="true" useworldspace="false"></mutation>
+                                  <field name="MODE">position</field>
+                                  <field name="OFFSET">FALSE</field>
+                                  <value name="TARGETOBJ">
+                                    <shadow type="objectList" id=":`JZvvLzfq@e%cpYl4;N">
+                                      <field name="FIELDNAME">&lt;none&gt;</field>
+                                    </shadow>
+                                    <block type="xrCameraControlObject" id=":OEEszEwy;S,C*J]Vc#V"></block>
+                                  </value>
+                                  <value name="USE_VECTOR">
+                                    <block type="createVector" id="ycGh]06mf6V1L]!Wn$gC">
+                                      <value name="X">
+                                        <shadow type="math_number" id="_A}|@TQMl~TN9Jk+~U=M">
+                                          <field name="NUM">0</field>
+                                        </shadow>
+                                      </value>
+                                      <value name="Y">
+                                        <shadow type="math_number" id="RoOX%^~?CzljcYO3Ht7N">
+                                          <field name="NUM">0</field>
+                                        </shadow>
+                                      </value>
+                                      <value name="Z">
+                                        <shadow type="math_number" id="q4z37k4A)+(rjOagdTw~">
+                                          <field name="NUM">0</field>
+                                        </shadow>
+                                      </value>
+                                    </block>
+                                  </value>
+                                  <next>
+                                    <block type="setObjTransform" id="`14#CeLY-Oj_QTO[Q![l">
+                                      <mutation xmlns="http://www.w3.org/1999/xhtml" usevectorslot="true" useworldspace="false"></mutation>
+                                      <field name="MODE">position</field>
+                                      <field name="OFFSET">FALSE</field>
+                                      <value name="TARGETOBJ">
+                                        <shadow type="objectList" id="QhAu|2JN]AKy@Dsr$b=c">
+                                          <field name="FIELDNAME">LateralFace</field>
+                                        </shadow>
+                                      </value>
+                                      <value name="X">
+                                        <block type="arHitPoint" id="e|#{C=J@zwcAnxknTT.{">
+                                          <field name="COORD">x</field>
+                                        </block>
+                                      </value>
+                                      <value name="Y">
+                                        <block type="arHitPoint" id="5aisW$)}R`34P8wBW~5k">
+                                          <field name="COORD">y</field>
+                                        </block>
+                                      </value>
+                                      <value name="Z">
+                                        <block type="arHitPoint" id="Lpa)t3jBh1R5,,N!7:K;">
+                                          <field name="COORD">z</field>
+                                        </block>
+                                      </value>
+                                      <value name="USE_VECTOR">
+                                        <block type="arHitPoint" id="j`-gS~tXT%Suy/F(R#NO">
+                                          <field name="COORD">xyz</field>
+                                        </block>
+                                      </value>
+                                      <next>
+                                        <block type="setObjTransform" id="kLJ9E![f1Xy]m~~cR}0Z">
+                                          <mutation xmlns="http://www.w3.org/1999/xhtml" usevectorslot="true" useworldspace="false"></mutation>
+                                          <field name="MODE">rotation</field>
+                                          <field name="OFFSET">FALSE</field>
+                                          <value name="TARGETOBJ">
+                                            <shadow type="objectList" id="f?asM(SXmc{WpKAIKvnY">
+                                              <field name="FIELDNAME">LateralFace</field>
+                                            </shadow>
+                                          </value>
+                                          <value name="USE_VECTOR">
+                                            <block type="arHitNormal" id="G8S/LQpve!ov-plrG?|o">
+                                              <field name="COORD">xyz</field>
+                                            </block>
+                                          </value>
+                                        </block>
+                                      </next>
+                                    </block>
+                                  </next>
                                 </block>
-                              </value>
-                              <value name="Y">
-                                <block type="arHitPoint" id="5aisW$)}R`34P8wBW~5k">
-                                  <field name="COORD">y</field>
-                                </block>
-                              </value>
-                              <value name="Z">
-                                <block type="arHitPoint" id="Lpa)t3jBh1R5,,N!7:K;">
-                                  <field name="COORD">z</field>
-                                </block>
-                              </value>
+                              </statement>
                             </block>
-                          </statement>
+                          </next>
                         </block>
                       </next>
                     </block>
