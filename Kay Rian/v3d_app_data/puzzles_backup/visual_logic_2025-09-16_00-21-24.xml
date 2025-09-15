@@ -1,0 +1,73 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="Init" type="InitTab" active="false" scrollx="20" scrolly="0" scale="0.9"></tab>
+  <tab name="New Tab" type="CommonTab" active="true" scrollx="241.80902099609375" scrolly="-167.22222900390625" scale="1">
+    <block xmlns="https://developers.google.com/blockly/xml" type="checkARMode" id="C_Gm-O26gZsgH1=_VoUX" x="30" y="230">
+      <statement name="DO_AVAIL">
+        <block type="enterARMode" id="[l!8:H3m+)w)MUL4uEGN">
+          <field name="REF_SPACE">ORIGIN</field>
+          <field name="ALLOW_HTML">TRUE</field>
+          <statement name="DO_ENTER">
+            <block type="arHitTest" id="f;+QC{*CTn(2Jiz^HKQE">
+              <value name="SMOOTH">
+                <shadow type="math_number" id="]Q#R6IC1j}T,/|Jjr9Bw">
+                  <field name="NUM">0</field>
+                </shadow>
+              </value>
+            </block>
+          </statement>
+        </block>
+      </statement>
+    </block>
+    <block xmlns="https://developers.google.com/blockly/xml" type="whenClicked" id="$9D[P7=LcUAt1!K#@94=" inline="false" x="70" y="650">
+      <mutation xmlns="http://www.w3.org/1999/xhtml" adveventoptions="false" enableifmissed="true" useid="false"></mutation>
+      <field name="X_RAY">FALSE</field>
+      <field name="DOUBLE_CLICK">FALSE</field>
+      <field name="LEFT_BUTTON">TRUE</field>
+      <field name="MIDDLE_BUTTON">TRUE</field>
+      <field name="RIGHT_BUTTON">TRUE</field>
+      <value name="VALUE">
+        <shadow type="objectList" id="5r=v3)=ikax{xasB%RU^">
+          <field name="FIELDNAME">Vertex</field>
+        </shadow>
+      </value>
+      <statement name="DO">
+        <block type="addAnnotation" id=";-~u?}MHfO.vfn%acRT:">
+          <mutation xmlns="http://www.w3.org/1999/xhtml" usenameslot="false"></mutation>
+          <value name="ANNOTATION">
+            <shadow type="text" id="e{dwG-Bl4EI5#+k$,ogZ">
+              <field name="TEXT">1</field>
+            </shadow>
+            <block type="text" id="8p4)N5TqU;{;opJ3+_np">
+              <field name="TEXT">Vertex</field>
+            </block>
+          </value>
+          <value name="TARGET">
+            <shadow type="objectList" id="Jh6T4gf6gxss1#*[Sm?O">
+              <field name="FIELDNAME">Vertex</field>
+            </shadow>
+          </value>
+          <value name="CONTENTS">
+            <shadow type="text" id="(,z+c(3?9bEj0_Teo[{i">
+              <field name="TEXT"></field>
+            </shadow>
+          </value>
+          <value name="ID">
+            <shadow type="text" id="C6J.2MHBJ?nwA3wORa=+">
+              <field name="TEXT"></field>
+            </shadow>
+          </value>
+        </block>
+      </statement>
+      <statement name="IF_MISSED_DO">
+        <block type="removeAnnotation" id="zBgW1_9j+V}kPaI@~rHl">
+          <value name="TARGET">
+            <shadow type="objectList" id="`!Cj693U`I|h99*J_R1Q">
+              <field name="FIELDNAME">Vertex</field>
+            </shadow>
+          </value>
+        </block>
+      </statement>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1107" viewport-y="37" viewport-w="750" viewport-h="460" viewport-hidden="true" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>
