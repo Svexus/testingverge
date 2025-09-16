@@ -73,21 +73,20 @@ function createPreloader(containerId, initOptions, PE) {
 }
 
 function createCustomPreloader(updateCb, finishCb) {
-    class CustomPreloader extends v3d.Preloader {
-        constructor() {
-            super();
-        }
+    function CustomPreloader() {
+        v3d.Preloader.call(this);
+    }
 
-        onUpdate(percentage) {
-            super.onUpdate(percentage);
+    CustomPreloader.prototype = Object.assign(Object.create(v3d.Preloader.prototype), {
+        onUpdate: function(percentage) {
+            v3d.Preloader.prototype.onUpdate.call(this, percentage);
             if (updateCb) updateCb(percentage);
-        }
-
-        onFinish() {
-            super.onFinish();
+        },
+        onFinish: function() {
+            v3d.Preloader.prototype.onFinish.call(this);
             if (finishCb) finishCb();
         }
-    }
+    });
 
     return new CustomPreloader();
 }
