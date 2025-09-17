@@ -1,46 +1,100 @@
-<!DOCTYPE html>
-<!-- __V3D_PUZZLES__ - enable Puzzles button in the App Manager -->
-<!-- __V3D_TEMPLATE__ - template-based file; delete this line to prevent this file from being updated -->
+<!doctype html>
 <html lang="en">
 <head>
-  <title>Verge3D Web Interactive</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-
-  <!-- Search Engines -->
-  <meta name="description" content="Interactive 3D Web application made with Verge3D. Immerse yourself in amazing graphics experience offered by state-of-the art WebGL and HTML5 technologies.">
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Verge3D Web Interactive">
-  <meta name="twitter:description" content="Interactive 3D Web application made with Verge3D. Immerse yourself in amazing graphics experience offered by state-of-the art WebGL and HTML5 technologies.">
-  <meta name="twitter:image:src" content="https://cdn.soft8soft.com/images/player_socials.jpg">
-  <!-- Open Graph -->
-  <meta property="og:title" content="Verge3D Web Interactive">
-  <meta property="og:description" content="Interactive 3D Web application made with Verge3D. Immerse yourself in amazing graphics experience offered by state-of-the art WebGL and HTML5 technologies.">
-  <meta property="og:image" content="https://cdn.soft8soft.com/images/player_socials.jpg">
-  <meta property="og:type" content="website">
-
-  <meta name="generator" content="Verge3D 4.7.1">
-
-  <!-- favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="media/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="media/favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="media/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="media/favicon-16x16.png">
-  <link rel="manifest" href="media/manifest.json">
-  <link rel="mask-icon" href="media/safari-pinned-tab.svg" color="#0048a5">
-  <meta name="theme-color" content="#ffffff">
-
-  <script src="v3d.js"></script>
-  <script src="Kay Rian.js"></script>
-
-  <link rel="stylesheet" type="text/css" href="Kay Rian.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Image-Triggered AR Launch</title>
+  <style>
+    html, body { margin:0; height:100%; background:#000; }
+    #mindar-video { position:fixed; inset:0; width:100%; height:100%; object-fit:cover; }
+    #mindar-canvas { position:fixed; inset:0; }
+    #ui { position:fixed; left:12px; bottom:12px; z-index:3; display:flex; gap:8px; }
+    button { padding:10px 14px; border:0; border-radius:8px; background:#fff; }
+  </style>
 </head>
-
 <body>
-  <div id="v3d-container">
-    <div id="fullscreen-button" class="fullscreen-button fullscreen-open" title="Toggle fullscreen mode"></div>
-  </div>
-</body>
+  <iframe width="100%" 
+	height="100%" 
+	allow="camera *; microphone *; autoplay *; clipboard-write"
+	allowfullscreen 
+	src="https://v3d.net/1cj9"></iframe>
+  <!-- MindAR layers -->
+  <video id="mindar-video" playsinline></video>
+  <canvas id="mindar-canvas"></canvas>
 
+  <div id="ui">
+    <button id="startBtn">Start Camera</button>
+    <button id="simulateBtn">Simulate Recognition</button>
+  </div>
+
+  <script type="module">
+    import { MindARThree } from 'https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.module.js';
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+
+    // TODO: replace these with your real HTTPS URLs
+    const USDZ_URL = 'https://your.host/files/model.usdz#callToAction=View%20in%20your%20space&allowsContentScaling=1';
+    const GLB_URL  = 'https://your.host/files/model.glb';
+    const FALLBACK = 'https://your.host/files/ar-fallback.html'; // optional
+
+    // Launch native AR depending on platform
+    function openNativeAR() {
+      const ua = navigator.userAgent || '';
+      if (/iPhone|iPad/i.test(ua)) {
+        // iOS Quick Look
+        location.href = USDZ_URL;
+      } else if (/Android/i.test(ua)) {
+        // Android Scene Viewer
+        const glb = encodeURIComponent(GLB_URL);
+        const fb  = encodeURIComponent(FALLBACK);
+        const intent =
+          `intent://arvr.google.com/scene-viewer/1.0?file=${glb}&mode=ar_preferred` +
+          `&title=${encodeURIComponent('Your Model')}` +
+          // Optional lock: add &resizable=false to prevent user scaling
+          `#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;` +
+          `S.browser_fallback_url=${fb};end;`;
+        location.href = intent;
+      } else {
+        alert('Open this page on a phone to view AR.');
+      }
+    }
+
+    // MindAR init
+    let mindarThree, renderer, scene, camera, anchor;
+
+    async function initMindAR() {
+      mindarThree = new MindARThree({
+        container: document.body,
+        imageTargetSrc: './targets.mind', // TODO: replace when you have your target set
+        uiLoading: 'no', uiScanning: 'no', uiError: 'no',
+      });
+
+      const ctx = mindarThree;
+      renderer = ctx.renderer;
+      scene    = ctx.scene;
+      camera   = ctx.camera;
+
+      // Create an anchor for target #0
+      anchor = mindarThree.addAnchor(0);
+      anchor.onTargetFound = () => {
+        // Fire once per recognition; guard if needed
+        openNativeAR();
+      };
+
+      // Minimal render loop (MindAR needs it even if we don't draw content)
+      renderer.setAnimationLoop(() => {
+        renderer.render(scene, camera);
+      });
+    }
+
+    document.getElementById('startBtn').addEventListener('click', async () => {
+      await initMindAR();
+      await mindarThree.start();
+    });
+
+    // For testing without a trained target yet
+    document.getElementById('simulateBtn').addEventListener('click', () => {
+      openNativeAR();
+    });
+  </script>
+</body>
 </html>
